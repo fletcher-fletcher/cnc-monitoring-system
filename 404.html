@@ -3,24 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>CNC Monitoring System</title>
-    <script type="module">
+    <script>
       // GitHub Pages SPA fix
-      const path = window.location.pathname;
-      const base = '/cnc-monitoring-system/';
-      
-      if (!path.startsWith(base)) {
-        const redirectTo = base + path.substring(1);
-        window.history.replaceState(null, null, redirectTo);
-      }
-      
-      // Load the main app
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = base + 'assets/index.js';
-      document.head.appendChild(script);
+      const segmentCount = 0;
+      const l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
     </script>
   </head>
   <body>
-    <div id="app"></div>
   </body>
 </html>
